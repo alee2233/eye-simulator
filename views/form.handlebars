@@ -1,62 +1,67 @@
-<h1>Eye Simulator</h1>
+<div class="container-fluid">
+  <h1>Eye Simulator</h1>
 
-<form method="GET" action="/eye">
-  <fieldset>
-    <legend>Left Eye:</legend>
-    <div>
-      <input type="checkbox" id="leftSupRec" name="lsr" value="1" checked>
-      <label for="leftSupRec">Superior Rectus</label>
+  <form method="GET" action="/eye">
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <legend>Right Eye</legend>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="rightSupRec" name="rsr" value="1" checked>
+            <label class="form-check-label" for="rightSupRec">Superior Rectus</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="rightInfRec" name="rir" value="1" checked>
+            <label class="form-check-label" for="rightInfRec">Inferior Rectus</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="rightLatRec" name="rlr" value="1" checked>
+            <label class="form-check-label" for="rightLatRec">Lateral Rectus</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="rightMedRec" name="rmr" value="1" checked>
+            <label class="form-check-label" for="rightMedRec">Medial Rectus</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="rightSupObl" name="rso" value="1" checked>
+            <label class="form-check-label" for="rightSupObl">Superior Oblique</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="rightInfObl" name="rio" value="1" checked>
+            <label class="form-check-label" for="rightInfObl">Inferior Oblique</label>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <legend>Left Eye</legend>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="leftSupRec" name="lsr" value="1" checked>
+            <label class="form-check-label" for="leftSupRec">Superior Rectus</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="leftInfRec" name="lir" value="1" checked>
+            <label class="form-check-label" for="leftInfRec">Inferior Rectus</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="leftLatRec" name="llr" value="1" checked>
+            <label class="form-check-label" for="leftLatRec">Lateral Rectus</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="leftMedRec" name="lmr" value="1" checked>
+            <label class="form-check-label" for="leftMedRec">Medial Rectus</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="leftSupObl" name="lso" value="1" checked>
+            <label class="form-check-label" for="leftSupObl">Superior Oblique</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="leftInfObl" name="lio" value="1" checked>
+            <label class="form-check-label" for="leftInfObl">Inferior Oblique</label>
+          </div>
+        </div>
+      </div>
     </div>
-    <div>
-      <input type="checkbox" id="leftInfRec" name="lir" value="1" checked>
-      <label for="leftInfRec">Inferior Rectus</label>
-    </div>
-    <div>
-      <input type="checkbox" id="leftLatRec" name="llr" value="1" checked>
-      <label for="leftLatRec">Lateral Rectus</label>
-    </div>
-    <div>
-      <input type="checkbox" id="leftMedRec" name="lmr" value="1" checked>
-      <label for="leftMedRec">Medial Rectus</label>
-    </div>
-    <div>
-      <input type="checkbox" id="leftSupObl" name="lso" value="1" checked>
-      <label for="leftSupObl">Superior Oblique</label>
-    </div>
-    <div>
-      <input type="checkbox" id="leftInfObl" name="lio" value="1" checked>
-      <label for="leftInfObl">Inferior Oblique</label>
-    </div>
-  </fieldset>
-
-  <fieldset>
-    <legend>Right Eye:</legend>
-    <div>
-      <input type="checkbox" id="rightSupRec" name="rsr" value="1" checked>
-      <label for="rightSupRec">Superior Rectus</label>
-    </div>
-    <div>
-      <input type="checkbox" id="rightInfRec" name="rir" value="1" checked>
-      <label for="rightInfRec">Inferior Rectus</label>
-    </div>
-    <div>
-      <input type="checkbox" id="rightLatRec" name="rlr" value="1" checked>
-      <label for="rightLatRec">Lateral Rectus</label>
-    </div>
-    <div>
-      <input type="checkbox" id="rightMedRec" name="rmr" value="1" checked>
-      <label for="rightMedRec">Medial Rectus</label>
-    </div>
-    <div>
-      <input type="checkbox" id="rightSupObl" name="rso" value="1" checked>
-      <label for="rightSupObl">Superior Oblique</label>
-    </div>
-    <div>
-      <input type="checkbox" id="rightInfObl" name="rio" value="1" checked>
-      <label for="rightInfObl">Inferior Oblique</label>
-    </div>
-  </fieldset>
-  <div>
-    <button type="submit">Select</button>
-  </div>
-</form>
+    <button class="btn btn-primary" type="submit">Select</button>
+  </form>
+</div>
