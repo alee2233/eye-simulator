@@ -2,6 +2,7 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 // Set up handlebars view engine
 app.engine('handlebars', handlebars({defaultLayout: 'main'}));
@@ -14,6 +15,6 @@ app.use(express.static(__dirname + '/public'));
 const routes = require('./routes/index');
 app.use('/', routes);
 
-app.listen(3000, () => {
-  console.log('Server running at http://localhost:3000/');
+app.listen(port, () => {
+  console.log('Listening on '+ port);
 });
