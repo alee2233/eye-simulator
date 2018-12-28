@@ -8,7 +8,8 @@ const eyeRadius = canvas.height/8;
 const pupilRadius = canvas.height/32;
 const clickRadius = 10;
 
-const rightEye = {
+const eye1 = {
+  position: 'right',
   x: canvas.width/3,
   y: canvas.height/2,
   pupil: {
@@ -23,7 +24,8 @@ const rightEye = {
   inferiorOblique: url.searchParams.get("rio")
 };
 
-const leftEye = {
+const eye2 = {
+  position: 'left',
   x: canvas.width*2/3,
   y: canvas.height/2,
   pupil: {
@@ -39,20 +41,20 @@ const leftEye = {
 };
 
 // initialize left and right eyes
-drawEye(context, rightEye.x, rightEye.y, rightEye.pupil.x, rightEye.pupil.y)
-drawEye(context, leftEye.x, leftEye.y, leftEye.pupil.x, leftEye.pupil.y)
+drawEye(context, eye1.x, eye1.y, eye1.pupil.x, eye1.pupil.y)
+drawEye(context, eye2.x, eye2.y, eye2.pupil.x, eye2.pupil.y)
 
 canvas.addEventListener('click',function(evt){
   //clear canvas
   context.clearRect(0, 0, canvas.width, canvas.height);
 
   //update coordinates
-  updatePupil(evt,rightEye);
-  updatePupil(evt,leftEye);
+  updatePupil(evt,eye1);
+  updatePupil(evt,eye2);
 
   //redraw eyes
-  drawEye(context, rightEye.x, rightEye.y, rightEye.pupil.x, rightEye.pupil.y)
-  drawEye(context, leftEye.x, leftEye.y, leftEye.pupil.x, leftEye.pupil.y)
+  drawEye(context, eye1.x, eye1.y, eye1.pupil.x, eye1.pupil.y)
+  drawEye(context, eye2.x, eye2.y, eye2.pupil.x, eye2.pupil.y)
 
   //draw click spot
   drawCircle(context, evt.clientX, evt.clientY, clickRadius, 'red')
@@ -65,13 +67,49 @@ function updatePupil(evt, eye) {
 
   // n is distance from eye center to click point
   const n = Math.sqrt(Math.pow(diffX,2)+Math.pow(diffY,2));
+  // max distance the pupil can travel
+  const maxDistance = eyeRadius - pupilRadius;
 
-  if (n <= (eyeRadius-pupilRadius)) {
+  if (n <= maxDistance) {
     eye.pupil.x = evt.clientX;
     eye.pupil.y = evt.clientY;
+  } else if (n == 0) {
+    eye.pupil.x = eye.x;
+    eye.pupil.y = eye.y;
   } else {
-    eye.pupil.x = eye.x + ((eyeRadius-pupilRadius)/n)*diffX;
-    eye.pupil.y = eye.y + ((eyeRadius-pupilRadius)/n)*diffY;
+    eye.pupil.x = eye.x + (maxDistance/n)*diffX;
+    eye.pupil.y = eye.y + (maxDistance/n)*diffY;
+  }
+
+  // edit values based on eye muscle on/off
+  if (eye.position === 'right') {
+    if (eye.medialRectus === null && eye.pupil.x > eye.x) {
+      eye.pupil.x = eye.x;
+    }
+    if (eye.lateralRectus === null && eye.pupil.x < eye.x) {
+      eye.pupil.x = eye.x;
+    }
+    if (eye.inferiorRectus === null && eye.pupil.y > eye.y) {
+      eye.pupil.y = eye.y;
+    }
+    if (eye.superiorRectus === null && eye.pupil.y < eye.y) {
+      eye.pupil.y = eye.y;
+    }
+  }
+
+  if (eye.position === 'left') {
+    if (eye.lateralRectus === null && eye.pupil.x > eye.x) {
+      eye.pupil.x = eye.x;
+    }
+    if (eye.medialRectus === null && eye.pupil.x < eye.x) {
+      eye.pupil.x = eye.x;
+    }
+    if (eye.inferiorRectus === null && eye.pupil.y > eye.y) {
+      eye.pupil.y = eye.y;
+    }
+    if (eye.superiorRectus === null && eye.pupil.y < eye.y) {
+      eye.pupil.y = eye.y;
+    }
   }
 }
 
