@@ -73,42 +73,94 @@ function updatePupil(evt, eye) {
   if (n <= maxDistance) {
     eye.pupil.x = evt.clientX;
     eye.pupil.y = evt.clientY;
-  } else if (n == 0) {
-    eye.pupil.x = eye.x;
-    eye.pupil.y = eye.y;
   } else {
     eye.pupil.x = eye.x + (maxDistance/n)*diffX;
     eye.pupil.y = eye.y + (maxDistance/n)*diffY;
   }
 
-  // edit values based on eye muscle on/off
-  if (eye.position === 'right') {
-    if (eye.medialRectus === null && eye.pupil.x > eye.x) {
-      eye.pupil.x = eye.x;
+  // polar coordinates
+  // html canvas is positive y in the down direction, so need to adjust accordingly
+  var theta = Math.atan2(1,0)
+
+  if (n > 0)
+    theta = Math.atan2(diffY,diffX)
+  
+  if (theta < 0)
+    theta = 2*Math.PI+theta
+
+  //alert("diffX="+diffX+"\ndiffY="+diffY+"\ntheta="+theta);
+  //alert("evt.clientX="+evt.clientX+", evt.clientY="+evt.clientY+", theta="+theta);
+  
+  if (theta >= (15*Math.PI/8) || theta <= (Math.PI/8)) {
+    if (eye.position === 'right' && eye.medialRectus === null) {
+      eye.pupil.x = eye.x
+      eye.pupil.y = eye.y
     }
-    if (eye.lateralRectus === null && eye.pupil.x < eye.x) {
-      eye.pupil.x = eye.x;
-    }
-    if (eye.inferiorRectus === null && eye.pupil.y > eye.y) {
-      eye.pupil.y = eye.y;
-    }
-    if (eye.superiorRectus === null && eye.pupil.y < eye.y) {
-      eye.pupil.y = eye.y;
+    if (eye.position === 'left' && eye.lateralRectus === null) {
+      eye.pupil.x = eye.x
+      eye.pupil.y = eye.y
     }
   }
-
-  if (eye.position === 'left') {
-    if (eye.lateralRectus === null && eye.pupil.x > eye.x) {
-      eye.pupil.x = eye.x;
+  if (theta >= (13*Math.PI/8) && theta < (15*Math.PI/8)) {
+    if (eye.position === 'right' && eye.inferiorOblique === null) {
+      eye.pupil.x = eye.x
+      eye.pupil.y = eye.y
     }
-    if (eye.medialRectus === null && eye.pupil.x < eye.x) {
-      eye.pupil.x = eye.x;
+    if (eye.position === 'left' && eye.superiorRectus === null) {
+      eye.pupil.x = eye.x
+      eye.pupil.y = eye.y
     }
-    if (eye.inferiorRectus === null && eye.pupil.y > eye.y) {
-      eye.pupil.y = eye.y;
+  }
+  if (theta >= (11*Math.PI/8) && theta < (13*Math.PI/8)) {
+    if (eye.superiorRectus === null && eye.inferiorOblique === null) {
+      eye.pupil.x = eye.x
+      eye.pupil.y = eye.y
     }
-    if (eye.superiorRectus === null && eye.pupil.y < eye.y) {
-      eye.pupil.y = eye.y;
+  }
+  if (theta > (9*Math.PI/8) && theta < (11*Math.PI/8)) {
+    if (eye.position === 'right' && eye.superiorRectus === null) {
+      eye.pupil.x = eye.x
+      eye.pupil.y = eye.y
+    }
+    if (eye.position === 'left' && eye.inferiorOblique === null) {
+      eye.pupil.x = eye.x
+      eye.pupil.y = eye.y
+    }
+  }
+  if (theta >= (7*Math.PI/8) && theta <= (9*Math.PI/8)) {
+    if (eye.position === 'right' && eye.lateralRectus === null) {
+      eye.pupil.x = eye.x
+      eye.pupil.y = eye.y
+    }
+    if (eye.position === 'left' && eye.medialRectus === null) {
+      eye.pupil.x = eye.x
+      eye.pupil.y = eye.y
+    }
+  }
+  if (theta >= (5*Math.PI/8) && theta < (7*Math.PI/8)) {
+    if (eye.position === 'right' && eye.inferiorRectus === null) {
+      eye.pupil.x = eye.x
+      eye.pupil.y = eye.y
+    }
+    if (eye.position === 'left' && eye.superiorOblique === null) {
+      eye.pupil.x = eye.x
+      eye.pupil.y = eye.y
+    }
+  }
+  if (theta >= (3*Math.PI/8) && theta < (5*Math.PI/8)) {
+    if (eye.superiorOblique === null && eye.inferiorRectus === null) {
+      eye.pupil.x = eye.x
+      eye.pupil.y = eye.y
+    }
+  }
+  if (theta > (Math.PI/8) && theta < (3*Math.PI/8)) {
+    if (eye.position === 'right' && eye.superiorOblique === null) {
+      eye.pupil.x = eye.x
+      eye.pupil.y = eye.y
+    }
+    if (eye.position === 'left' && eye.inferiorRectus === null) {
+      eye.pupil.x = eye.x
+      eye.pupil.y = eye.y
     }
   }
 }
